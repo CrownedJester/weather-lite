@@ -35,9 +35,20 @@ interface WeatherApi {
 
     }
 
+    @GET("current.json")
+    fun getCurrentWeather(
+        @Query("q") q: String,
+        @Query("aqi") aqi: String = "no",
+    )
+
     //lat-lon, cityname, US zip, UK post, metar Code, iata-airport code, auto:ip, ipaddress, byId, bulk query
-    @GET()
-    fun getWeather(@Query("q") q: String): WeatherDto
+    @GET("forecast.json")
+    fun getWeatherForecast(
+        @Query("q") q: String,
+        @Query("days") days: Int,
+        @Query("aqi") aqi: String = "no",
+        @Query("alerts") alerts: String = "no",
+    ): WeatherDto
 
     @GET("search.json")
     fun search(@Query("q") q: String): SearchResponseDto
