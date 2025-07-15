@@ -1,9 +1,7 @@
 package com.crowedjester.edu.weatherlite.data.dto
 
-import com.crowedjester.edu.weatherlite.data.dto.AirQuality
-import com.crowedjester.edu.weatherlite.data.dto.Condition
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 
 @Serializable
@@ -29,7 +27,7 @@ data class Day(
     @SerialName("daily_chance_of_snow") var dailyChanceOfSnow: Int = INT_DEFAULT,
     @SerialName("condition") var condition: Condition? = Condition(),
     @SerialName("uv") var uv: Double = DOUBLE_DEFAULT,
-    @SerialName("air_quality") var airQuality: AirQuality? = AirQuality(),
+    @SerialName("air_quality") var airQuality: AirQuality = AirQuality(),
 
     )
 

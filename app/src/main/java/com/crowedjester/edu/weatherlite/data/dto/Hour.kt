@@ -1,9 +1,7 @@
 package com.crowedjester.edu.weatherlite.data.dto
 
-import com.crowedjester.edu.weatherlite.data.dto.AirQuality
-import com.crowedjester.edu.weatherlite.data.dto.Condition
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 
 @Serializable
@@ -43,6 +41,6 @@ data class Hour(
   @SerialName("gust_mph") var gustMph: Int = INT_DEFAULT,
   @SerialName("gust_kph") var gustKph: Double = DOUBLE_DEFAULT,
   @SerialName("uv") var uv: Int = INT_DEFAULT,
-  @SerialName("air_quality") var airQuality: AirQuality? = AirQuality(),
+  @SerialName("air_quality") var airQuality: AirQuality = AirQuality(),
 
   )
