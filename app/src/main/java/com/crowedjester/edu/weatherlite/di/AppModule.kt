@@ -1,6 +1,8 @@
 package com.crowedjester.edu.weatherlite.di
 
 import com.crowedjester.edu.weatherlite.data.WeatherApi
+import com.crowedjester.edu.weatherlite.domain.repo.WeatherRepository
+import com.crowedjester.edu.weatherlite.domain.repo.WeatherRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,6 +32,10 @@ object AppModule {
     @Singleton
     fun providesWeatherApi(retrofit: Retrofit): WeatherApi =
         retrofit.create(WeatherApi::class.java)
+
+    @Provides
+    @Singleton
+    fun providesRemoteRepository(api: WeatherApi): WeatherRepository = WeatherRepositoryImpl(api)
 
 }
 
