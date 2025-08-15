@@ -6,6 +6,6 @@ import javax.inject.Inject
 
 class SearchUseCase @Inject constructor(private val repo: WeatherRepository) {
 
-    suspend operator fun invoke(query: String) = repo.search(query).toSearchResult()
+    suspend operator fun invoke(query: String) = repo.search(query).map { it.toSearchResult() }
 
 }

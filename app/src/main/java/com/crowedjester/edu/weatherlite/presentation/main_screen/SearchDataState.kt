@@ -5,6 +5,6 @@ import com.crowedjester.edu.weatherlite.domain.model.SearchResult
 
 data class SearchDataState(
     val isLoading: Boolean = false,
-    val data: SearchResult? = null,
+    val data: List<SearchResult> = listOf(),
     val error: String = EMPTY_STRING,
 )

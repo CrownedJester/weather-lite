@@ -16,6 +16,6 @@ interface WeatherRepository {
         alerts: String,
     ): WeatherDto
 
-    suspend fun search(query: String): SearchResponseDto
+    suspend fun search(query: String): List<SearchResponseDto>
 
 }

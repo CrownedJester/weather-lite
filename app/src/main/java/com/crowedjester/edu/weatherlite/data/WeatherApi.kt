@@ -20,14 +20,6 @@ interface WeatherApi {
         val client = with(OkHttpClient.Builder()) {
             val logging = HttpLoggingInterceptor()
 
-            addInterceptor { chain ->
-                val request = chain.request().newBuilder()
-                request.header("X-API-KEY", BuildConfig.KEY)
-
-                val response = chain.proceed(request.build())
-
-                return@addInterceptor response
-            }
 
             addInterceptor(logging)
 
@@ -40,6 +32,7 @@ interface WeatherApi {
     suspend fun getCurrentWeather(
         @Query("q") q: String,
         @Query("aqi") aqi: String = "no",
+        @Query("key") key: String = BuildConfig.KEY,
     ): CurrentWeatherDto
 
     //lat-lon, cityname, US zip, UK post, metar Code, iata-airport code, auto:ip, ipaddress, byId, bulk query
@@ -49,8 +42,12 @@ interface WeatherApi {
         @Query("days") days: Int,
         @Query("aqi") aqi: String = "no",
         @Query("alerts") alerts: String = "no",
+        @Query("key") key: String = BuildConfig.KEY,
     ): WeatherDto
 
     @GET("search.json")
-    suspend fun search(@Query("q") q: String): SearchResponseDto
+    suspend fun search(
+        @Query("key") key: String = BuildConfig.KEY,
+        @Query("q") q: String,
+    ): List<SearchResponseDto>
 }

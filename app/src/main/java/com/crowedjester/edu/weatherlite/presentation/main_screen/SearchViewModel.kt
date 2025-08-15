@@ -38,11 +38,10 @@ class SearchViewModel @Inject constructor(private val searchUseCase: SearchUseCa
 
                     try {
                         _searchResultStateFlow.apply {
-                            emit(value.copy(isLoading = true))
+                            emit(SearchDataState(isLoading = true))
 
                             emit(
-                                value.copy(
-                                    isLoading = false,
+                                SearchDataState(
                                     data = searchUseCase(
                                         event.query
                                     )
@@ -52,8 +51,7 @@ class SearchViewModel @Inject constructor(private val searchUseCase: SearchUseCa
                     } catch (e: HttpException) {
                         _searchResultStateFlow.apply {
                             emit(
-                                value.copy(
-                                    isLoading = false,
+                                SearchDataState(
                                     error = e.message.toString()
                                 )
                             )
@@ -63,8 +61,7 @@ class SearchViewModel @Inject constructor(private val searchUseCase: SearchUseCa
 
                         _searchResultStateFlow.apply {
                             emit(
-                                value.copy(
-                                    isLoading = false,
+                                SearchDataState(
                                     error = e.message.toString()
                                 )
                             )
@@ -79,13 +76,14 @@ class SearchViewModel @Inject constructor(private val searchUseCase: SearchUseCa
 
             is SearchEvents.SaveQuery -> {
                 viewModelScope.launch(IO) {
-                    _savedQueries.value.run {
+                    _savedQueries.value.apply {
 
                         addFirst(event.query)
 
                         if (size > 5) {
                             removeLast()
                         }
+
                     }
 
                 }

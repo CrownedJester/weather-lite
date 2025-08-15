@@ -24,6 +24,6 @@ class WeatherRepositoryImpl @Inject constructor(
         api.getWeatherForecast(query, days, aqi, alerts)
 
 
-    override suspend fun search(query: String): SearchResponseDto = api.search(query)
+    override suspend fun search(query: String): List<SearchResponseDto> = api.search(q = query)
 
 }
